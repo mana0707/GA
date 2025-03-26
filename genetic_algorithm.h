@@ -8,6 +8,11 @@ typedef struct individual {
     int8_t all_cost;
 } Individual;
 
-
+Individual individual_init(Place location, int8_t all_cost) {
+    Individual individual;
+    individual.location = location;
+    individual.all_cost = all_cost;
+    return individual;
+}
 
 #endif

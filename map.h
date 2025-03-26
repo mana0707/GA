@@ -5,14 +5,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-const int8_t cost[3][2] = {{1, 2}, {3, 4}, {5, 6}};
-
 typedef enum place
 {
     A,
     B,
     C
 } Place;
+
+const int8_t cost[3][2] = {{1, 2}, {3, 4}, {5, 6}};
 
 typedef struct load
 {
@@ -23,6 +23,7 @@ typedef struct load
 typedef struct map
 {
     int8_t **cost;
+    Load *load;
 } Map;
 
 Map map_init()
@@ -42,6 +43,18 @@ Map map_init()
             map.cost[i][j] = cost[i][j];
         }
     }
+    map.load = (Load *)malloc(sizeof(Load));
+    if (map.load == NULL)
+        exit(1);
+    for (int8_t i = 0; i < 3; ++i)
+    {
+        for (int8_t j = 0; j < 2; ++j)
+        {
+            map.load->cost[i][j] = cost[i][j];
+        }
+    }
+    map.load->place_num = 3;
+
     printf("map initialize\n");
     return map;
 }
